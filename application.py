@@ -1,10 +1,10 @@
 
-from flask import Flask, redirect, url_for, request
+from flask import Flask, redirect, url_for, request, render_template
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World'
+    return '<html><body><h1>Hello World</h1></body></html>'
 
 @app.route('/variabletest/<name>')
 def print_variable(name):
@@ -33,6 +33,7 @@ def information():
         return redirect(url_for('hello_guest', guest=info))
     else:
         return redirect(url_for('hello_world'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
