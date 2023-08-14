@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return '<html><body><h1>Hello World</h1></body></html>'
+    return render_template('index.html')
 
 @app.route('/variabletest/<name>')
 def print_variable(name):
@@ -34,6 +34,12 @@ def information():
     else:
         return redirect(url_for('hello_world'))
 
+@app.route('/templatesample')
+def table_example():
+    username = 'Micahel'
+    avg_score = 70
+    marks_dict = {'phy': 50, 'che': 70, 'math': 50}
+    return render_template('templatesample.html', name=username, marks = avg_score, results = marks_dict)
 
 if __name__ == '__main__':
     app.run(debug=True)
