@@ -17,10 +17,9 @@ Please fill the following form
 {% endblock %}
 
 {% block H2_Content %}
- <form>
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname">
+ <form action = "http://localhost:5000/add_recipe" method = "post">
+  <label for="rname">Recipe name:</label><br>
+  <input type="text" id="rname" name="rname"><br>
+  <input type="submit" value="Submit">
 </form>
 {% endblock %}

@@ -6,9 +6,14 @@ app = Flask(__name__)
 def hello_world():
     return render_template('index.html')
 
-@app.route('/add_recipe')
+@app.route('/add_recipe', methods = ['POST', 'GET'])
 def add_recipe():
-    return render_template('index.html')
+    if request.method == 'POST':
+        rname = request.form['rname']
+        print(rname)
+        return "Recipe added successfully"
+    else:
+        return render_template('add_recipe_manual.html')
 
 
 @app.route('/variabletest/<name>')
