@@ -4,7 +4,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return render_template('base.html', head_title= 'Cooking Recipes', page_title='Welcome to the collection of cooking recipes')
+    return render_template('index.html')
+
+@app.route('/add_recipe')
+def add_recipe():
+    return render_template('index.html')
+
 
 @app.route('/variabletest/<name>')
 def print_variable(name):
