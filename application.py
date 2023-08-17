@@ -32,11 +32,16 @@ def add_recipe_auto():
         ingredients_list = form.ingredients_list.data
         preparation_instructions = form.preparation_instructions.data
         serving_instructions = form.serving_instructions.data
-        df = pd.DataFrame([{'Recipe name': recipe_name, 'ingredients': ingredients_list, 'Prep Instructions': preparation_instructions, 'Serving Instructions': serving_instructions}])
+        pic_filename = recipe_name.lower().replace(" ", "_") + '.' + secure_filename(form.recipe_image.data.filename).split('.')[-1]
+        form.recipe_image.data.save(os.path.join(app.config['SUBMITTED_IMG'] + pic_filename))
+        df = pd.DataFrame([{'Recipe name': recipe_name, 'ingredients': ingredients_list, 'Prep Instructions': preparation_instructions, 'Serving Instructions': serving_instructions, 'image': pic_filename}])
+        df.to_csv(os.path.join(app.config['SUBMITTED_DATA'] + recipe_name.lower().replace(" ", "_") + '.csv'))
         print(df)
         return redirect(url_for('hello_world'))
     else:
         return render_template('add_recipe_auto.html', form=form)
+@app.route('/display_data/<name>')
+def render_information(name):
 
 
 @app.route('/variabletest/<name>')
