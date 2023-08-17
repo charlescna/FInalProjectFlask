@@ -1,11 +1,15 @@
 
+import os
 from flask import Flask, redirect, url_for, request, render_template
 from forms import RecipeForm
 import pandas as pd
+from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'nfjkdhdshkjhfd7864578374nfjsghfi74ujfshj'
+app.config['SUBMITTED_DATA'] = os.path.join('static', 'data_dir', '')
+app.config['SUBMITTED_IMG'] = os.path.join('static', 'image_dir', '')
 
 @app.route('/')
 def hello_world():
@@ -28,10 +32,9 @@ def add_recipe_auto():
         ingredients_list = form.ingredients_list.data
         preparation_instructions = form.preparation_instructions.data
         serving_instructions = form.serving_instructions.data
-        df = pd.DataFrame({'Recipe name': recipe_name, 'ingredients': ingredients_list, 'Prep Instructions': preparation_instructions, 'Serving Instructions': serving_instructions})
+        df = pd.DataFrame([{'Recipe name': recipe_name, 'ingredients': ingredients_list, 'Prep Instructions': preparation_instructions, 'Serving Instructions': serving_instructions}])
         print(df)
         return redirect(url_for('hello_world'))
-        pass
     else:
         return render_template('add_recipe_auto.html', form=form)
 
