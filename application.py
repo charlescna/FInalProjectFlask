@@ -1,5 +1,8 @@
 
 from flask import Flask, redirect, url_for, request, render_template
+from forms import RecipeForm
+
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,6 +17,15 @@ def add_recipe():
         return "Recipe added successfully"
     else:
         return render_template('add_recipe_manual.html')
+
+@app.route('/add_recipe_auto', methods = ['POST', 'GET'])
+def add_recipe():
+    if request.method == 'POST':
+        rname = request.form['rname']
+        print(rname)
+        return "Recipe added successfully"
+    else:
+        return render_template('add_recipe_auto.html')
 
 
 @app.route('/variabletest/<name>')
